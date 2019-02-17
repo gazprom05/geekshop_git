@@ -1,0 +1,17 @@
+<ul class="links-menu">
+    {#{ request.resolver_match.kwargs }#}
+    <li>
+        <a href="{% url 'products:category' 0 %}"
+           class="{% if request.resolver_match.kwargs.category_pk == '0' %}active{% endif %}">
+            все
+        </a>
+    </li>
+    {% for category in categories %}
+        <li>
+            <a href="{% url 'products:category' category.pk %}"
+            class="{% if request.resolver_match.kwargs.category_pk|add:0 == category.pk %}active{% endif %}">
+                {{ category.name }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>
